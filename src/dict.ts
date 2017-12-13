@@ -24,6 +24,20 @@ export class Dict<T> {
         }
         return result.join(',')
     }
+
+    get count(): number {
+        let n = 0
+        for (let key in this.datastore) {
+            n++
+        }
+        return n
+    }
+
+    clear() {
+        for (let key in this.datastore) {
+            delete this.datastore[key]
+        }
+    }
 }
 
 interface DictItem<T> {

@@ -31,3 +31,11 @@ function doTest(testFunc) {
     exports.log('*** test end ***\n');
 }
 exports.doTest = doTest;
+function calcTime(func, funcName) {
+    var start = new Date().getTime();
+    func();
+    var end = new Date().getTime();
+    var elapsed = end - start;
+    exports.log('doing ' + funcName + ' takes time ' + String(elapsed) + 'ms');
+}
+exports.calcTime = calcTime;

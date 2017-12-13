@@ -27,4 +27,12 @@ export function doTest(testFunc: () => void) {
     log('*** test start ***');
     testFunc();
     log('*** test end ***\n');
-} 
+}
+
+export function calcTime(func: () => void, funcName: string) {
+    const start = new Date().getTime()
+    func()
+    const end = new Date().getTime()
+    const elapsed = end - start
+    log('doing ' + funcName + ' takes time ' + String(elapsed) + 'ms')
+}

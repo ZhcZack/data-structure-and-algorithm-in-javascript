@@ -10,3 +10,14 @@ function test1() {
     lib.assertEqual(pbook.showAll(), 'Mike:233')
 }
 lib.doTest(test1)
+
+function test2() {
+    let pbook = new Dict<number>()
+    pbook.add('Raymond', 123)
+    pbook.add('David', 345)
+    pbook.add('Cynthia', 456)
+    lib.assertEqual(pbook.count, 3)
+    pbook.clear()
+    lib.assertEqual(pbook.count, 0)
+}
+lib.doTest(test2)
