@@ -4,11 +4,11 @@ var loop_linked_list_1 = require("./loop_linked_list");
 var lib = require("./util");
 function test1() {
     var cities = new loop_linked_list_1.LoopLinkedList();
-    cities.insert('bj');
-    cities.insert('sh', 'bj');
-    cities.insert('gz', 'sh');
-    cities.insert('sz', 'gz');
-    lib.log(cities.display());
-    lib.assertEqual(cities.display(), 'bj,sh,gz,sz');
+    cities.insertAfter('bj');
+    cities.insertAfter('sh', 'bj');
+    cities.insertAfter('gz', 'sh');
+    cities.insertAfter('sz', 'gz');
+    lib.log(cities.walkThrough());
+    lib.assertEqual(cities.walkThrough(), 'bj,sh,gz,sz');
 }
 lib.doTest(test1);

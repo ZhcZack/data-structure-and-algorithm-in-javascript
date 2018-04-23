@@ -2,15 +2,10 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
-        "sourceMap": false,
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "strictNullChecks": true,
+        "strict": true,
         "outDir": ""
     },
     "include": [
-        "src",
-        "src/test"
+        "lib/**/*"
     ]
 }

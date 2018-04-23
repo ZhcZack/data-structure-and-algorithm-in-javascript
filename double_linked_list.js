@@ -11,80 +11,92 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var linked_list_1 = require("./linked_list");
-var node_1 = require("./node");
+var DLNode = /** @class */ (function () {
+    function DLNode(element, next, prev) {
+        this.element = element;
+        this.next = next;
+        this.prev = prev;
+    }
+    return DLNode;
+}());
 var DoubleLinkedList = /** @class */ (function (_super) {
     __extends(DoubleLinkedList, _super);
     function DoubleLinkedList() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.head = new DLNode();
+        return _this;
     }
     DoubleLinkedList.prototype.find = function (item) {
         var currNode = this.head;
-        while (currNode !== null && currNode.element !== item) {
+        while (currNode.next) {
             currNode = currNode.next;
+            if (currNode.element === item) {
+                return currNode;
+            }
         }
-        return currNode;
+        return null;
     };
     DoubleLinkedList.prototype.findLast = function () {
         var currNode = this.head;
-        while (currNode.next !== null) {
+        while (currNode.next) {
             currNode = currNode.next;
         }
         return currNode;
     };
-    DoubleLinkedList.prototype.displayReverse = function () {
+    DoubleLinkedList.prototype.reverseWalkThrough = function () {
         var result = [];
         var currNode = this.findLast();
-        while (currNode.previous !== null) {
-            if (currNode.element !== null) {
+        while (currNode.prev) {
+            if (currNode.element) {
                 result.push(currNode.element);
             }
-            currNode = currNode.previous;
+            currNode = currNode.prev;
         }
         return result.join(',');
     };
-    DoubleLinkedList.prototype.insert = function (newElement, item) {
+    DoubleLinkedList.prototype.insertAfter = function (newElement, item) {
         if (item === void 0) { item = null; }
         // 链表这么可怕的嘛……
-        var newNode = new node_1.Node(newElement);
+        var newNode = new DLNode(newElement);
         if (item === null) {
             this.head.next = newNode;
-            newNode.previous = this.head;
+            newNode.prev = this.head;
         }
         else {
             var currNode = this.find(item);
             if (currNode !== null) {
                 newNode.next = currNode.next;
                 currNode.next = newNode;
-                newNode.previous = currNode;
-                if (newNode.next !== null) {
-                    newNode.next.previous = newNode;
+                newNode.prev = currNode;
+                if (newNode.next) {
+                    newNode.next.prev = newNode;
                 }
             }
         }
     };
     DoubleLinkedList.prototype.remove = function (item) {
         var currNode = this.find(item);
-        if (currNode !== null) {
-            if (currNode.next === null) {
-                if (currNode.previous !== null) {
-                    currNode.previous.next = null;
+        if (currNode) {
+            if (!currNode.next) {
+                if (currNode.prev) {
+                    currNode.prev.next = undefined;
                 }
-                currNode.previous = null;
+                currNode.prev = undefined;
             }
             else {
-                if (currNode.previous !== null) {
-                    currNode.previous.next = currNode.next;
+                if (currNode.prev) {
+                    currNode.prev.next = currNode.next;
                 }
-                currNode.next.previous = currNode.previous;
-                currNode.next = null;
-                currNode.previous = null;
+                currNode.next.prev = currNode.prev;
+                currNode.next = undefined;
+                currNode.prev = undefined;
             }
         }
     };
     DoubleLinkedList.prototype.back = function (n) {
         while (n > 0) {
-            if (this.nowNode.previous !== null) {
-                this.nowNode = this.nowNode.previous;
+            if (this.nowNode.prev) {
+                this.nowNode = this.nowNode.prev;
             }
             n--;
         }

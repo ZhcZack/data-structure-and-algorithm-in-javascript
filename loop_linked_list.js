@@ -11,15 +11,22 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var linked_list_1 = require("./linked_list");
-var node_1 = require("./node");
+var LLLNode = /** @class */ (function () {
+    function LLLNode(element, next, prev) {
+        this.element = element;
+        this.next = next;
+        this.prev = prev;
+    }
+    return LLLNode;
+}());
 var LoopLinkedList = /** @class */ (function (_super) {
     __extends(LoopLinkedList, _super);
     function LoopLinkedList() {
         return _super.call(this) || this;
     }
-    LoopLinkedList.prototype.insert = function (newElement, item) {
+    LoopLinkedList.prototype.insertAfter = function (newElement, item) {
         if (item === void 0) { item = null; }
-        var newNode = new node_1.Node(newElement);
+        var newNode = new LLLNode(newElement);
         var current = item === null ? null : this.find(item);
         if (current === null) {
             this.head.next = newNode;
@@ -29,17 +36,6 @@ var LoopLinkedList = /** @class */ (function (_super) {
             newNode.next = current.next;
             current.next = newNode;
         }
-    };
-    LoopLinkedList.prototype.display = function () {
-        var result = [];
-        var currNode = this.head;
-        do {
-            if (currNode.element !== null) {
-                result.push(currNode.element);
-            }
-            currNode = currNode.next;
-        } while (currNode !== null && currNode.element !== null && currNode.next !== null);
-        return result.join(',');
     };
     return LoopLinkedList;
 }(linked_list_1.LinkedList));
