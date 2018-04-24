@@ -2,9 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var list_1 = require("./list");
 var util = require("./util");
-var fs = require("fs");
 function test1() {
-    var names = new list_1.List();
+    var names = new list_1.ZList();
     names.append('Cynthia');
     names.append('Raymond');
     names.append('Barbara');
@@ -14,7 +13,7 @@ function test1() {
 }
 test1();
 function test2() {
-    var names = new list_1.List();
+    var names = new list_1.ZList();
     names.append("Clayton");
     names.append("Raymond");
     names.append("Cynthia");
@@ -34,49 +33,3 @@ function test2() {
     // }
 }
 test2();
-function test3() {
-    function createArr(file) {
-        var movies = [];
-        fs.readFile('./' + file, { encoding: 'utf-8' }, function (err, data) {
-            movies = data.split('\n');
-        });
-        movies = movies.map(function (movie) { return movie.trim(); });
-        return movies;
-    }
-    var Customer = /** @class */ (function () {
-        function Customer(name, movie) {
-            this.name = name;
-            this.movie = movie;
-            //
-        }
-        return Customer;
-    }());
-    function displayList(list) {
-        for (list.front(); list.currPos < list.length; list.next()) {
-            if (list.element instanceof Customer) {
-                util.log(list.element['name'] + ', ' + list.element['movie']);
-            }
-            else {
-                util.log(list.element);
-            }
-        }
-    }
-    function checkOut(name, movie, filmList, customerList) {
-        if (filmList.contains(movie)) {
-            var c = new Customer(name, movie);
-            customerList.append(c);
-            filmList.remove(movie);
-        }
-        else {
-            util.log(movie + ' is not available.');
-        }
-    }
-    // test code here
-    var movies = createArr('films.txt');
-    var movieList = new list_1.List();
-    var customers = new list_1.List();
-    for (var _i = 0, movies_1 = movies; _i < movies_1.length; _i++) {
-        var movie = movies_1[_i];
-        movieList.append(movie);
-    }
-}

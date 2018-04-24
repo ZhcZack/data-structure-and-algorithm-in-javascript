@@ -44,15 +44,15 @@ export class DoubleLinkedList<T> extends LinkedList<T> {
         return result.join(',')
     }
 
-    insertAfter(newElement: T, item: T | null = null) {
+    insertAfter(newElement: T, item: T | undefined = undefined) {
         // 链表这么可怕的嘛……
         const newNode = new DLNode(newElement)
-        if (item === null) {
+        if (!item) {
             this.head.next = newNode
             newNode.prev = this.head
         } else {
             let currNode = this.find(item)
-            if (currNode !== null) {
+            if (currNode) {
                 newNode.next = currNode.next
                 currNode.next = newNode
                 newNode.prev = currNode

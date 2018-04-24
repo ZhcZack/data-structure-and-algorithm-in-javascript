@@ -1,33 +1,32 @@
-type PrimitiveType = string | number | boolean;
+// 栈，先进后出
+interface Stack<T> {
+    length: number
+    push(element: T): void
+    peek(): T | undefined
+    pop(): T | null
+    clear(): void
+}
 
-export class Stack<T> {
-    private dataScore: T[];
-    private top: number;
+export class ZStack<T> implements Stack<T> {
+    private elements: T[] = []
 
-    constructor() {
-        this.dataScore = [];
-        this.top = 0;
+    get length(): number {
+        return this.elements.length
     }
 
     push(element: T) {
-        this.dataScore[this.top] = element;
-        this.top++;
+        this.elements.push(element)
     }
 
     peek(): T | undefined {
-        return this.dataScore[this.top - 1];
+        return this.elements[this.length - 1]
     }
 
     pop(): T | null {
-        this.top--;
-        return this.top >= 0 ? this.dataScore[this.top] : null;
+        return this.length <= 0 ? null : this.elements.pop()!
     }
 
     clear() {
-        this.top = 0;
-    }
-
-    get length(): number {
-        return this.top;
+        this.elements = []
     }
 }

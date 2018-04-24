@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var stack_1 = require("./stack");
 var lib = require("./util");
 var test1 = function () {
-    var s = new stack_1.Stack();
+    var s = new stack_1.ZStack();
     s.push('David');
     s.push('Raymond');
     s.push('Bryan');
@@ -21,7 +21,7 @@ var test1 = function () {
 };
 lib.doTest(test1);
 function mulBase(num, base) {
-    var s = new stack_1.Stack();
+    var s = new stack_1.ZStack();
     do {
         s.push(num % base);
         num = Math.floor(num /= base);
@@ -41,7 +41,7 @@ var test2 = function () {
 };
 lib.doTest(test2);
 function isPalindrome(word) {
-    var s = new stack_1.Stack();
+    var s = new stack_1.ZStack();
     for (var _i = 0, word_1 = word; _i < word_1.length; _i++) {
         var w = word_1[_i];
         s.push(w);
@@ -65,7 +65,7 @@ var test3 = function () {
 };
 lib.doTest(test3);
 function fact(n) {
-    var s = new stack_1.Stack();
+    var s = new stack_1.ZStack();
     while (n > 1) {
         s.push(n);
         n--;

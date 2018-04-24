@@ -1,63 +1,88 @@
-export class Queue<T> {
-    private dataStore: T[] = [];
+// 队列，在后面加入、从前面推出
+interface Queue<T> {
+    size: number
+    empty: boolean
+    front: T | undefined
+    back: T | undefined
+    enqueue(element: T): void
+    dequeue(): T | undefined
+}
 
-    enqueue(element: T) {
-        this.dataStore.push(element);
+// 反向队列，在前面加入、从后面推出
+// （测试里也可以从后面加入`append`）
+interface Deque<T> {
+    size: number
+    empty: boolean
+    append(element: T): void
+    pop(): T | undefined
+    enqueue(element: T): void
+    dequeue(): T | undefined
+}
+
+export class ZQueue<T> implements Queue<T> {
+    get size(): number {
+        return this.datas.length
     }
 
-    dequeue(): T | undefined {
-        return this.dataStore.shift();
+    get empty(): boolean {
+        return this.size <= 0
     }
 
     get front(): T | undefined {
-        return this.dataStore[0];
+        return this.datas.shift()
     }
 
     get back(): T | undefined {
-        return this.dataStore[this.dataStore.length - 1];
+        return this.datas.pop()
     }
 
+    // for debug
     toString(): string {
-        let retStr = '';
-        for (let d of this.dataStore) {
-            retStr += d + '\n';
-        }
-        return retStr;
+        return this.datas.join(',')
     }
 
-    get isEmpty(): boolean {
-        return this.dataStore.length === 0;
-    }
-}
+    private datas: T[] = []
 
-export class Deque<T> {
-    private dataStore: T[] = [];
-
-    append(element: T) {
-        this.dataStore.push(element);
-    }
-
-    pop(): T | undefined {
-        return this.dataStore.pop();
-    }
-
-    enqueue(element: T) {
-        this.dataStore.unshift(element);
+    enqueue(element: T): void {
+        this.datas.push(element)
     }
 
     dequeue(): T | undefined {
-        return this.dataStore.shift();
+        return this.front
     }
 
-    get length(): number {
-        return this.dataStore.length;
+}
+
+export class ZDeque<T> implements Deque<T> {
+    get size(): number {
+        return this.datas.length
     }
 
-    get isEmpty(): boolean {
-        return this.length === 0;
+    get empty(): boolean {
+        return this.size <= 0
     }
 
+    // for debug
     toString(): string {
-        return this.dataStore.join(',');
+        return this.datas.join(',')
     }
+
+    private datas: T[] = []
+
+    enqueue(element: T): void {
+        this.datas.unshift(element)
+    }
+
+    dequeue(): T | undefined {
+        return this.datas.shift()
+    }
+
+    append(element: T): void {
+        this.datas.push(element)
+    }
+
+    pop(): T | undefined {
+        return this.datas.pop()
+    }
+
 }

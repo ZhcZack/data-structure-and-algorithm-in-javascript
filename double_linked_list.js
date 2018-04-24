@@ -55,16 +55,16 @@ var DoubleLinkedList = /** @class */ (function (_super) {
         return result.join(',');
     };
     DoubleLinkedList.prototype.insertAfter = function (newElement, item) {
-        if (item === void 0) { item = null; }
+        if (item === void 0) { item = undefined; }
         // 链表这么可怕的嘛……
         var newNode = new DLNode(newElement);
-        if (item === null) {
+        if (!item) {
             this.head.next = newNode;
             newNode.prev = this.head;
         }
         else {
             var currNode = this.find(item);
-            if (currNode !== null) {
+            if (currNode) {
                 newNode.next = currNode.next;
                 currNode.next = newNode;
                 newNode.prev = currNode;

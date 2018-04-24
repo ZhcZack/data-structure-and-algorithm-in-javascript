@@ -1,93 +1,71 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var List = /** @class */ (function () {
-    function List() {
-        this.pos = 0;
-        this.listSize = 0;
-        this.dataStore = [];
+var ZList = /** @class */ (function () {
+    function ZList() {
+        this.elements = [];
+        this.index = 0;
     }
-    List.prototype.append = function (element) {
-        this.dataStore.push(element);
-        this.listSize++;
+    Object.defineProperty(ZList.prototype, "length", {
+        get: function () {
+            return this.elements.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZList.prototype, "element", {
+        get: function () {
+            return this.elements[this.index];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ZList.prototype.front = function () {
+        this.index = 0;
     };
-    List.prototype.find = function (element) {
-        for (var i = 0; i < this.dataStore.length; i++) {
-            if (this.dataStore[i] === element) {
-                return i;
-            }
+    ZList.prototype.next = function () {
+        this.index += 1;
+        if (this.index >= this.length) {
+            this.index = this.length - 1;
         }
-        return -1;
     };
-    List.prototype.remove = function (element) {
-        var foundAt = this.find(element);
-        if (foundAt > -1) {
-            this.dataStore.splice(foundAt, 1);
-            this.listSize--;
-            return true;
+    ZList.prototype.prev = function () {
+        this.index -= 1;
+        if (this.index <= 0) {
+            this.index = 0;
         }
-        return false;
     };
-    List.prototype.toString = function () {
-        return String(this.dataStore);
+    ZList.prototype.append = function (element) {
+        this.elements.push(element);
     };
-    List.prototype.insert = function (element, after) {
-        var insertPos = this.find(after);
-        if (insertPos > -1) {
-            this.dataStore.splice(insertPos + 1, 0, element);
-            this.listSize++;
-            return true;
+    ZList.prototype.remove = function (element) {
+        var result = this.contains(element);
+        if (!result) {
+            return false;
         }
-        return false;
-    };
-    List.prototype.clear = function () {
-        this.dataStore = [];
-        this.listSize = this.pos = 0;
-    };
-    List.prototype.contains = function (element) {
-        for (var i = 0; i < this.dataStore.length; i++) {
-            if (this.dataStore[i] === element) {
+        for (var i = 0; i < this.length; i++) {
+            if (this.elements[i] === element) {
+                this.elements.splice(i, 1);
                 return true;
             }
         }
         return false;
     };
-    List.prototype.front = function () {
-        this.pos = 0;
+    ZList.prototype.clear = function () {
+        this.elements = [];
+        this.index = 0;
     };
-    List.prototype.end = function () {
-        this.pos = this.listSize - 1;
-    };
-    List.prototype.prev = function () {
-        if (this.pos > -1) {
-            this.pos--;
+    ZList.prototype.contains = function (element) {
+        for (var _i = 0, _a = this.elements; _i < _a.length; _i++) {
+            var el = _a[_i];
+            if (element === el) {
+                return true;
+            }
         }
+        return false;
     };
-    List.prototype.next = function () {
-        if (this.pos < this.listSize) {
-            this.pos++;
-        }
+    ZList.prototype.toString = function () {
+        return this.elements.join(',');
     };
-    Object.defineProperty(List.prototype, "currPos", {
-        get: function () {
-            return this.pos;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(List.prototype, "element", {
-        get: function () {
-            return this.dataStore[this.pos];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(List.prototype, "length", {
-        get: function () {
-            return this.listSize;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return List;
+    return ZList;
 }());
-exports.List = List;
+exports.ZList = ZList;

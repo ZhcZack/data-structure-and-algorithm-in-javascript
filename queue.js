@@ -1,80 +1,84 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Queue = /** @class */ (function () {
-    function Queue() {
-        this.dataStore = [];
+var ZQueue = /** @class */ (function () {
+    function ZQueue() {
+        this.datas = [];
     }
-    Queue.prototype.enqueue = function (element) {
-        this.dataStore.push(element);
-    };
-    Queue.prototype.dequeue = function () {
-        return this.dataStore.shift();
-    };
-    Object.defineProperty(Queue.prototype, "front", {
+    Object.defineProperty(ZQueue.prototype, "size", {
         get: function () {
-            return this.dataStore[0];
+            return this.datas.length;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Queue.prototype, "back", {
+    Object.defineProperty(ZQueue.prototype, "empty", {
         get: function () {
-            return this.dataStore[this.dataStore.length - 1];
+            return this.size <= 0;
         },
         enumerable: true,
         configurable: true
     });
-    Queue.prototype.toString = function () {
-        var retStr = '';
-        for (var _i = 0, _a = this.dataStore; _i < _a.length; _i++) {
-            var d = _a[_i];
-            retStr += d + '\n';
-        }
-        return retStr;
+    Object.defineProperty(ZQueue.prototype, "front", {
+        get: function () {
+            return this.datas.shift();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZQueue.prototype, "back", {
+        get: function () {
+            return this.datas.pop();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // for debug
+    ZQueue.prototype.toString = function () {
+        return this.datas.join(',');
     };
-    Object.defineProperty(Queue.prototype, "isEmpty", {
-        get: function () {
-            return this.dataStore.length === 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Queue;
+    ZQueue.prototype.enqueue = function (element) {
+        this.datas.push(element);
+    };
+    ZQueue.prototype.dequeue = function () {
+        return this.front;
+    };
+    return ZQueue;
 }());
-exports.Queue = Queue;
-var Deque = /** @class */ (function () {
-    function Deque() {
-        this.dataStore = [];
+exports.ZQueue = ZQueue;
+var ZDeque = /** @class */ (function () {
+    function ZDeque() {
+        this.datas = [];
     }
-    Deque.prototype.append = function (element) {
-        this.dataStore.push(element);
-    };
-    Deque.prototype.pop = function () {
-        return this.dataStore.pop();
-    };
-    Deque.prototype.enqueue = function (element) {
-        this.dataStore.unshift(element);
-    };
-    Deque.prototype.dequeue = function () {
-        return this.dataStore.shift();
-    };
-    Object.defineProperty(Deque.prototype, "length", {
+    Object.defineProperty(ZDeque.prototype, "size", {
         get: function () {
-            return this.dataStore.length;
+            return this.datas.length;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Deque.prototype, "isEmpty", {
+    Object.defineProperty(ZDeque.prototype, "empty", {
         get: function () {
-            return this.length === 0;
+            return this.size <= 0;
         },
         enumerable: true,
         configurable: true
     });
-    Deque.prototype.toString = function () {
-        return this.dataStore.join(',');
+    // for debug
+    ZDeque.prototype.toString = function () {
+        return this.datas.join(',');
     };
-    return Deque;
+    ZDeque.prototype.enqueue = function (element) {
+        this.datas.unshift(element);
+    };
+    ZDeque.prototype.dequeue = function () {
+        return this.datas.shift();
+    };
+    ZDeque.prototype.append = function (element) {
+        this.datas.push(element);
+    };
+    ZDeque.prototype.pop = function () {
+        return this.datas.pop();
+    };
+    return ZDeque;
 }());
-exports.Deque = Deque;
+exports.ZDeque = ZDeque;

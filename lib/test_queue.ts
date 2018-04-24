@@ -1,16 +1,16 @@
 import * as lib from './util';
-import { Queue, Deque } from './queue';
+import { ZQueue, ZDeque } from './queue';
 
 function test1() {
-    let q = new Queue<string>();
+    let q = new ZQueue<string>();
     q.enqueue('Meredith');
     q.enqueue('Cynthia');
     q.enqueue('Jennifer');
     // lib.log(q.toString());
-    lib.assertEqual(q.toString(), 'Meredith\nCynthia\nJennifer\n');
+    lib.assertEqual(q.toString(), 'Meredith,Cynthia,Jennifer');
 
     q.dequeue();
-    lib.assertEqual(q.toString(), 'Cynthia\nJennifer\n');
+    lib.assertEqual(q.toString(), 'Cynthia,Jennifer');
     lib.assertEqual(q.front, 'Cynthia');
     lib.assertEqual(q.back, 'Jennifer');
 }
@@ -18,7 +18,7 @@ function test1() {
 lib.doTest(test1);
 
 function dequeTest() {
-    let dq = new Deque<string>();
+    let dq = new ZDeque<string>();
     dq.append('hi');
     dq.append('hey');
     dq.enqueue('hello');
@@ -36,15 +36,15 @@ function dequeTest() {
 lib.doTest(dequeTest);
 
 function isPalidromeWithDeque(word: string): boolean {
-    let dq1 = new Deque<string>();
-    let dq2 = new Deque<string>();
+    let dq1 = new ZDeque<string>();
+    let dq2 = new ZDeque<string>();
 
     for (let w of word) {
         dq1.enqueue(w);
         dq2.append(w);
     }
 
-    while (!dq1.isEmpty && !dq2.isEmpty) {
+    while (!dq1.empty && !dq2.empty) {
         let v1 = dq1.dequeue();
         let v2 = dq2.dequeue();
         if (v1 !== v2) {

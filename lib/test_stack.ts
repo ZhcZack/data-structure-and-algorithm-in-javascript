@@ -1,8 +1,8 @@
-import { Stack } from './stack';
+import { ZStack } from './stack';
 import * as lib from './util';
 
 const test1 = () => {
-    const s = new Stack<string>();
+    const s = new ZStack<string>();
     s.push('David');
     s.push('Raymond');
     s.push('Bryan');
@@ -26,7 +26,7 @@ const test1 = () => {
 lib.doTest(test1);
 
 function mulBase(num: number, base: number): string {
-    let s = new Stack<number>();
+    let s = new ZStack<number>();
     do {
         s.push(num % base);
         num = Math.floor(num /= base);
@@ -48,7 +48,7 @@ const test2 = () => {
 lib.doTest(test2);
 
 function isPalindrome(word: string): boolean {
-    let s = new Stack<string>();
+    let s = new ZStack<string>();
     for (let w of word) {
         s.push(w);
     }
@@ -73,7 +73,7 @@ const test3 = () => {
 lib.doTest(test3);
 
 function fact(n: number): number {
-    let s = new Stack<number>();
+    let s = new ZStack<number>();
     while (n > 1) {
         s.push(n);
         n--;
