@@ -1,6 +1,6 @@
 // 参考MDN上的Set来实现，没有实现generator
 interface Set<T> {
-    size: number
+    readonly size: number
     add(value: T): void
     clear(): void
     delete(value: T): boolean

@@ -1,6 +1,6 @@
 // 栈，先进后出
 interface Stack<T> {
-    length: number
+    readonly length: number
     push(element: T): void
     peek(): T | undefined
     pop(): T | null

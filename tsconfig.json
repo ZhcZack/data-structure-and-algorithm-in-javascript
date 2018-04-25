@@ -6,6 +6,6 @@
         "outDir": ""
     },
     "include": [
-        "lib/**/*"
+        "src/**/*"
     ]
 }

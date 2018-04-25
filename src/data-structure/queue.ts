@@ -1,9 +1,9 @@
 // 队列，在后面加入、从前面推出
 interface Queue<T> {
-    size: number
-    empty: boolean
-    front: T | undefined
-    back: T | undefined
+    readonly size: number
+    readonly empty: boolean
+    readonly front: T | undefined
+    readonly back: T | undefined
     enqueue(element: T): void
     dequeue(): T | undefined
 }
@@ -11,8 +11,8 @@ interface Queue<T> {
 // 反向队列，在前面加入、从后面推出
 // （测试里也可以从后面加入`append`）
 interface Deque<T> {
-    size: number
-    empty: boolean
+    readonly size: number
+    readonly empty: boolean
     append(element: T): void
     pop(): T | undefined
     enqueue(element: T): void

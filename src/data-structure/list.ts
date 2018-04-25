@@ -1,7 +1,7 @@
 // 列表，可迭代
 interface List<T> {
-    length: number
-    element: T
+    readonly length: number
+    readonly element: T
     append(element: T): void
     remove(element: T): boolean
     clear(): void
