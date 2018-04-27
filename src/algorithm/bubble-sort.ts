@@ -3,7 +3,7 @@
  * 
  * 如果一次检查过程中出现过冒泡，那就从后一个值处开始下一轮检查过程，直到没有冒泡行为或已经检查到了最后一位数
  */
-export function bubbleSort(datas: number[]) {
+export function bubbleSort<T>(datas: T[]) {
     let swapped = true
     while (swapped) {
         swapped = false
@@ -16,11 +16,11 @@ export function bubbleSort(datas: number[]) {
     }
 }
 
-function bigCompare(value: number, target: number): boolean {
+function bigCompare<T>(value: T, target: T): boolean {
     return value > target
 }
 
-function swap(datas: number[], index: number) {
+function swap<T>(datas: T[], index: number) {
     if (index < 0 || index > datas.length - 1) {
         return
     }

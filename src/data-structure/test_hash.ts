@@ -1,12 +1,15 @@
-import * as lib from './util'
-import { HashTable } from './hash'
+import { ZHash } from "./hash";
+import { log, assertEqual } from "./util";
 
-function test1() {
-    let someNames = ['David', 'Jennifer', 'Donnie', 'Raymond', 'Cynthia', 'Mike', 'Clayton', 'Danny', 'Jonathan',]
-    let table = new HashTable()
-    for (let name of someNames) {
-        table.put(name)
-    }
-    table.showDistro()
+function test() {
+    let table = new ZHash()
+    table.insert([10, 11, 12, 13])
+    table.insert([0, 1, 2, 3])
+    log(table.search(10))
+    log(table.search(9))
+    table.insert(['1', '2', '3'])
+    // assertEqual(table.display().toString(), '10,11,12,13')
+    log(table.display())
 }
-lib.doTest(test1)
+
+test()
